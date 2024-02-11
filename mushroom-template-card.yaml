@@ -1,0 +1,61 @@
+type: custom:mushroom-template-card
+entity: alarm_control_panel.home_alarm
+primary: |
+  {% if is_state(entity, 'armed_home') %}
+  ARMED HOME
+  {% elif is_state(entity, 'armed_away') %}
+  ARMED AWAY
+  {% elif is_state(entity, 'armed_night') %}
+  ARMED NIGHT
+  {% elif is_state(entity, 'disarmed') %}
+  DISARMED
+  {% elif is_state(entity, 'arming') %}
+  ARMING
+  {% elif is_state(entity, 'pending') %}
+  ALARM PENDING
+  {% elif is_state(entity, 'triggered') %}
+  ALARM TRIGGERED
+  {% else %}
+  OFFLINE
+  {% endif %}
+fill_container: true
+tap_action:
+  action: none
+hold_action:
+  action: none
+double_tap_action:
+  action: none
+badge_color: ''
+layout: vertical
+multiline_secondary: false
+card_mod:
+  style:
+    mushroom-state-info$: |
+      .container{
+      --card-primary-font-size: 100px;
+      --card-primary-color: white;
+      }
+      .primary {
+      padding: 50px 50px 50px 50px;
+      }
+      .: |
+        ha-card {
+        border-radius: 0px;
+        {% if is_state(config.entity, 'armed_home') %}
+        background-color: rgba(255, 0, 0, 100);
+        {% elif is_state(config.entity, 'armed_away') %}
+        background-color: rgba(255, 0, 0, 100);
+        {% elif is_state(config.entity, 'armed_night') %}
+        background-color: rgba(255, 0, 0, 100);
+        {% elif is_state(config.entity, 'arming') %}
+        background-color: rgba(255, 0, 0, 100);
+        {% elif is_state(config.entity, 'pending') %}
+        background-color: rgba(255, 0, 0, 100);
+        {% elif is_state(config.entity, 'triggered') %}
+        background-color: rgba(255, 0, 0, 100);
+        {% elif is_state(config.entity, 'disarmed') %}
+        background-color: rgba(0, 100, 0, 100);
+        {% else %}
+        background-color: rgba(175, 90, 0, .4);
+        {% endif %}
+        }
